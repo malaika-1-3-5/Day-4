@@ -1,33 +1,3 @@
-#import torch
-#import torch.nn as nn
-#import torch.optim
-#from torchvision.datasets import datasets, transforms
-#from torch.util.data import DataLoader
-
-#transform = transforms.Compose([
-#    transforms.ToTensor(),
-    # FashionMNIST is single-channel (1). Normalize must match the number of channels.
-#    transforms.Normalize((0.5,), (0.5,))
-#])
-
-#train_data = datasets.CIFAR100(root='./dir', train=True, download=True, transforms=transforms)
-#test_data = datasets.CIFAR100(root='./dir', train=False, download=False, transforms=transforms)
-
-#train_loader = DataLoader(train_data, batch_size=128, shuffle=True)
-#test_loader = DataLoader(test_data, batch_size=128, shuffle=False)
-
-#class cnn_cifar100(nn.Module):
-#    def __init__(self):
-#        super(cnn_cifar100, self).__init__()
-#        self.conv1 = nn.Conv2d(3, 32, 5) #Input channels=3, output channels=32, kernel_size=3, padding=1; output channels is based on the number of filters used, one each per filter
-#        # Asyou move further in the convolution, the numebr of layers must increase but the size of the filter mist reduce
-#        # 3 conclusions --- (1) no. of channels = no. of filters; (2) as the depth increases, the number of filters increases; (3) as the depth increases, the size of filters decreases
-#        # kernel_size decreases as depth increases because as the depth increases, the image size decreases
-#        self.pool1 = nn.MaxPool2d(2, 2) #Usually take 2x2 filter size, no filter values
-
-#        self.conv2 = nn.Conv2d(32, 64, 3) #maxpool reduces image, channels remain same
-#        self.pool2 = nn.MaxPool2d(2, 2)
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -35,7 +5,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
-device = torch.device("cuda" if torch.cuda.is_available else "CPU")
+device = torch.device("cuda" if torch.cuda.is_available else)
 print(f"Using device: {device}")
 #These 2 lines are written to use the GPU(if available in the system) to run deep learning
 
