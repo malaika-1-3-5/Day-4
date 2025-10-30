@@ -43,7 +43,9 @@ for param in model.parameters():
 
 # Replace final fully connected layer
 num_features = model.fc.in_features
-model.fc = nn.Linear(num_features, len(image_datasets['train']))
+model.fc = nn.Linear(num_features, 2)
+criterian=nn.CrossEntropyLoss()
+optimizer=optim.Adam(model.fc.parameters(),lr=0.001)
 
 #(fc): Linear(in_features=512, out_features=1000, bias=True)
 
@@ -52,7 +54,7 @@ for epoch in range(20):
     for image, label in train_loader:
         #image, label = image.to(device), label.to(device)
         output = model(image)
-        loss = criterion(output, label)
+        loss = criterian(output, label)
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
@@ -65,7 +67,7 @@ with torch.no_grad():
     for images, label in test_loader:
         output = model(image)
         max, predicted = torch.max(output, 1)
-        correct += (predicted==label).sum().item()
+        correct+= (predicted==label).sum().item()
         total += label.size(0)
     print(f"Test accuacy: {(correct/total)*100}%")
 
